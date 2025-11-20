@@ -77,8 +77,8 @@ namespace anti_debug
 			if (reinterpret_cast<uint64_t>(exception_handler) == reinterpret_cast<uint64_t>(vectored_handler_list) + 0x8)
 				break;
 
-			auto decrypted_handler = decode_pointer(reinterpret_cast<std::uint64_t>(exception_handler->encrypted_handler), process_cookie);
-			vectored_exception_handlers.push_back(decrypted_handler);
+			auto decoded_handler = decode_pointer(reinterpret_cast<std::uint64_t>(exception_handler->encoded_handler), process_cookie);
+			vectored_exception_handlers.push_back(decoded_handler);
 			exception_handler = reinterpret_cast<PVECTORED_HANDLER_ENTRY>(exception_handler->entry.Flink);
 		} while (exception_handler != last_exception_handler);
 
