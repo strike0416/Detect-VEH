@@ -13,7 +13,7 @@ namespace anti_debug
 		LIST_ENTRY entry;
 		PVOID refs;
 		PVOID unknown;
-		PVECTORED_EXCEPTION_HANDLER encrypted_handler;
+		PVECTORED_EXCEPTION_HANDLER encoded_handler;
 	} VECTORED_HANDLER_ENTRY, *PVECTORED_HANDLER_ENTRY;
 
 	typedef struct _VECTORED_HANDLER_LIST
