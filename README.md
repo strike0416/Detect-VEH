@@ -43,7 +43,7 @@ After obtaining the Process Cookie, you can compute the decoded handler address 
 
 # About Other Process
 If you want to inspect the handlers of another process, you can refer to your own ntdll address to easily obtain information about the handler list.<br>
-However, to decode an `encoded handler`, you’ll need the target process’s `process cookie`.<br>
+However, to decode an encoded handler, you’ll need the target process’s process cookie.<br>
 After checking multiple processes, I found that in most cases (in all processes I tested), the process cookie was cached.<br>
 Therefore, by modifying the target of `get_cached_process_cookie()` in the source code to point to another process, you should be able to inspect that process’s VectoredExceptionHandler as well.
 
