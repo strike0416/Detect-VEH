@@ -2,7 +2,7 @@
 Detect VectoredExceptionHandler(VEH) by look up <b>LdrpVectorHandlerList</b>.<br>
 tested on Windows 11 ver 23H2
 
-# PoC
+# Introduction
 To detect VectoredExceptionHandler, you need to analyze the <b>RtlAddVectoredExceptionHandler</b>.<br>
 Using ida, you can see that VectoredExceptionHandler is stored in a structure named <b>LdrpVectorHandlerList</b> as shown in the picture below.<br>
 You can obtain the LdrpVectorHandlerList value by performing a pattern scan for `83 E0 3F 48 8D 3D`.
