@@ -2,9 +2,9 @@
 
 namespace memory
 {
-	bool is_readable(std::uint64_t start, size_t size)
+	bool is_readable(uintptr_t start, size_t size)
 	{
-		unsigned char* ptr = reinterpret_cast<unsigned char*>(start);
+		uint8_t* ptr = reinterpret_cast<uint8_t*>(start);
 		auto end = ptr + size;
 		while (ptr < end)
 		{
@@ -23,9 +23,9 @@ namespace memory
 		return true;
 	}
 
-	std::vector<std::pair<std::uint8_t, bool>> string_to_pattern(const char* pattern)
+	std::vector<std::pair<uint8_t, bool>> string_to_pattern(const char* pattern)
 	{
-		auto hex_to_nibble = [](char c) -> std::uint8_t
+		auto hex_to_nibble = [](char c) -> uint8_t
 			{
 				if (c >= '0' && c <= '9') return c - '0';
 				if (c >= 'A' && c <= 'F') return c - 'A' + 10;
@@ -33,7 +33,7 @@ namespace memory
 				return 0;
 			};
 
-		std::vector<std::pair<std::uint8_t, bool>> ptrn;
+		std::vector<std::pair<uint8_t, bool>> ptrn;
 		size_t length = std::strlen(pattern);
 		for (int i = 0; i < length; ++i)
 		{
@@ -62,16 +62,16 @@ namespace memory
 		return ptrn;
 	}
 
-	std::uint64_t pattern_scan(std::uint64_t start, std::uint64_t size, const char* pattern)
+	uintptr_t pattern_scan(uintptr_t start, size_t size, const char* pattern)
 	{
 		if (!is_readable(start, size))
 			return 0;
 
-		std::vector<std::pair<std::uint8_t, bool>> ptrn = string_to_pattern(pattern);
+		auto ptrn = string_to_pattern(pattern);
 
-		std::uint8_t* buffer = reinterpret_cast<std::uint8_t*>(start);
+		auto buffer = reinterpret_cast<uint8_t*>(start);
 		const size_t length = ptrn.size();
-		for (std::uint64_t i = 0; i < size - length; ++i)
+		for (uintptr_t i = 0; i < size - length; ++i)
 		{
 			bool match = true;
 			for (size_t j = 0; j < length; ++j)
@@ -84,9 +84,7 @@ namespace memory
 			}
 
 			if (match)
-			{
-				return reinterpret_cast<std::uint64_t>(buffer) + i;
-			}
+				return reinterpret_cast<uintptr_t>(buffer) + i;
 		}
 
 		return 0;
