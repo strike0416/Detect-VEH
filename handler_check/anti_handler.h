@@ -33,7 +33,7 @@ namespace anti_debug
 
 	std::expected<PVECTORED_HANDLER_LIST, std::string> get_vectored_handler_list();
 
-	std::expected<std::vector<std::uint64_t>, std::string> scan_vectored_exception_handlers();
+	std::expected<std::vector<uintptr_t>, std::string> scan_vectored_exception_handlers();
 }
 
 #endif
