@@ -27,9 +27,9 @@ namespace anti_debug
 	} VECTORED_HANDLER_LIST, *PVECTORED_HANDLER_LIST;
 
 	ULONG get_process_cookie();
-	std::expected<std::uint32_t, std::string> get_cached_process_cookie();
+	std::expected<uint32_t, std::string> get_cached_process_cookie();
 
-	std::uint64_t decode_pointer(std::uint64_t ptr, std::uint32_t process_cookie);
+	uintptr_t decode_pointer(uintptr_t ptr, uint32_t process_cookie);
 
 	std::expected<PVECTORED_HANDLER_LIST, std::string> get_vectored_handler_list();
 
