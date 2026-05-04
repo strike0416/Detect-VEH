@@ -6,6 +6,7 @@ tested on Windows 11 ver 25H2, Windows 10 22H2
 To detect VectoredExceptionHandler, you need to analyze the <b>RtlAddVectoredExceptionHandler</b>.<br>
 Using ida, you can see that VectoredExceptionHandler is stored in a structure named <b>LdrpVectorHandlerList</b> as shown in the picture below.<br>
 You can obtain the LdrpVectorHandlerList value by performing a pattern scan for `48 8D 0D ? ? ? ? 48`.
+(The image below originally showed <b>lea rdi, [LdrpVectorHandlerList]</b> as the instruction used for retrieval, but for Windows compatibility reasons, it has been changed to use <b>lea rcx, [LdrpVectorHandlerList]</b> instead.)
 <img src="imgs/LdrpVectorHandlerList_ida.png">
 
 The struct of the handler list is as follows.
